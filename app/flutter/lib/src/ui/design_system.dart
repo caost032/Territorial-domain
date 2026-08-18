@@ -1,5 +1,3 @@
-import 'dart:ui' show FontFeature;
-
 import 'package:flutter/material.dart';
 
 abstract final class OdparDesign {
@@ -13,16 +11,17 @@ abstract final class OdparDesign {
   static const Color danger = Color(0xFFEE7C78);
 
   static ThemeData get theme {
-    final ColorScheme colors = ColorScheme.fromSeed(
-      seedColor: accent,
-      brightness: Brightness.dark,
-    ).copyWith(
-      primary: accent,
-      secondary: amber,
-      error: danger,
-      surface: voidBlack,
-      onSurface: text,
-    );
+    final ColorScheme colors =
+        ColorScheme.fromSeed(
+          seedColor: accent,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: accent,
+          secondary: amber,
+          error: danger,
+          surface: voidBlack,
+          onSurface: text,
+        );
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -55,11 +54,7 @@ abstract final class OdparDesign {
           fontWeight: FontWeight.w600,
           letterSpacing: 1.5,
         ),
-        bodyMedium: TextStyle(
-          color: textMuted,
-          fontSize: 13,
-          height: 1.45,
-        ),
+        bodyMedium: TextStyle(color: textMuted, fontSize: 13, height: 1.45),
         labelLarge: TextStyle(
           color: text,
           fontSize: 12,
@@ -115,10 +110,10 @@ final class OdparActionButton extends StatelessWidget {
       height: 48,
       child: FilledButton(
         style: FilledButton.styleFrom(
-          foregroundColor:
-              primary ? OdparDesign.voidBlack : OdparDesign.text,
-          backgroundColor:
-              primary ? OdparDesign.accent : const Color(0xFF1B222A),
+          foregroundColor: primary ? OdparDesign.voidBlack : OdparDesign.text,
+          backgroundColor: primary
+              ? OdparDesign.accent
+              : const Color(0xFF1B222A),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
             side: BorderSide(

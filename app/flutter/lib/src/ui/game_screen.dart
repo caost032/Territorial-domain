@@ -1,6 +1,5 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -12,11 +11,7 @@ import '../render/raster_budget.dart';
 import 'design_system.dart';
 
 final class GameScreen extends StatefulWidget {
-  const GameScreen({
-    required this.runtime,
-    required this.input,
-    super.key,
-  });
+  const GameScreen({required this.runtime, required this.input, super.key});
 
   final GameRuntime runtime;
   final MultiTouchInputRouter input;
@@ -114,11 +109,7 @@ final class _GameScreenState extends State<GameScreen>
     if (size != null && padding != null) {
       widget.input.clear();
       widget.input.updateLayout(
-        ControlLayout.forViewport(
-          size,
-          padding,
-          moveOnLeft: value,
-        ),
+        ControlLayout.forViewport(size, padding, moveOnLeft: value),
       );
     }
   }
@@ -147,29 +138,24 @@ final class _GameScreenState extends State<GameScreen>
     );
   }
 
-  Widget _buildFrame(
-    BuildContext context,
-    Size viewport,
-    EdgeInsets padding,
-  ) {
+  Widget _buildFrame(BuildContext context, Size viewport, EdgeInsets padding) {
     final GameSnapshot snapshot = widget.runtime.snapshot;
     final ControlLayout controls = ControlLayout.forViewport(
       viewport,
       padding,
       moveOnLeft: _moveOnLeft,
     );
-    final bool interactive = widget.runtime.started &&
+    final bool interactive =
+        widget.runtime.started &&
         !_menuOpen &&
         !_settingsOpen &&
         snapshot.playerAlive &&
         !snapshot.matchOver;
-    final bool actionEnabled = interactive &&
+    final bool actionEnabled =
+        interactive &&
         (snapshot.turretActionAvailable || snapshot.hackActionAvailable);
     final bool dropEnabled = interactive && snapshot.dropActionAvailable;
-    widget.input.setActionsEnabled(
-      action: actionEnabled,
-      drop: dropEnabled,
-    );
+    widget.input.setActionsEnabled(action: actionEnabled, drop: dropEnabled);
 
     return Listener(
       behavior: HitTestBehavior.opaque,
@@ -236,11 +222,7 @@ final class _GameScreenState extends State<GameScreen>
     );
   }
 
-  Widget _buildHud(
-    GameSnapshot snapshot,
-    EdgeInsets padding,
-    Size viewport,
-  ) {
+  Widget _buildHud(GameSnapshot snapshot, EdgeInsets padding, Size viewport) {
     final bool landscape = viewport.width > viewport.height;
     final double side = padding.left + 14;
     final double top = padding.top + 12;
@@ -279,9 +261,7 @@ final class _GameScreenState extends State<GameScreen>
           left: padding.left + 18,
           right: padding.right + 18,
           bottom: padding.bottom + 16,
-          child: Center(
-            child: _StatusLine(snapshot: snapshot),
-          ),
+          child: Center(child: _StatusLine(snapshot: snapshot)),
         ),
       ],
     );
@@ -361,10 +341,7 @@ final class _TerritoryReadout extends StatelessWidget {
                   emphasized: true,
                 ),
                 const Spacer(),
-                OdparMetric(
-                  label: 'EN RED',
-                  value: '${snapshot.aliveCount}',
-                ),
+                OdparMetric(label: 'EN RED', value: '${snapshot.aliveCount}'),
               ],
             ),
             const SizedBox(height: 8),
@@ -404,8 +381,7 @@ final class _Leaderboard extends StatelessWidget {
               _LeaderRow(
                 rank: index + 1,
                 leader: snapshot.leaders[index],
-                percent:
-                    snapshot.leaderPercent(snapshot.leaders[index].score),
+                percent: snapshot.leaderPercent(snapshot.leaders[index].score),
               ),
           ],
         ),
@@ -429,9 +405,8 @@ final class _LeaderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final String name = leader.isPlayer
         ? 'TÚ'
-        : GameRuntime.leaderNames[
-            leader.nameCode % GameRuntime.leaderNames.length
-          ];
+        : GameRuntime.leaderNames[leader.nameCode %
+              GameRuntime.leaderNames.length];
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Row(
@@ -451,9 +426,7 @@ final class _LeaderRow extends StatelessWidget {
               name,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: leader.isPlayer
-                    ? OdparDesign.accent
-                    : OdparDesign.text,
+                color: leader.isPlayer ? OdparDesign.accent : OdparDesign.text,
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.8,
@@ -489,7 +462,8 @@ final class _StatusLine extends StatelessWidget {
     } else if (snapshot.trailActive) {
       color = OdparDesign.amber;
     } else if (snapshot.nearbyTurretVisible) {
-      text = 'TORRETA  ${snapshot.nearbyTurretAmmo}'
+      text =
+          'TORRETA  ${snapshot.nearbyTurretAmmo}'
           '/${snapshot.nearbyTurretMaxAmmo}  ·  ${snapshot.statusLabel}';
       color = OdparDesign.accent;
     }
@@ -669,8 +643,10 @@ final class _SettingsPanel extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Text('SISTEMA',
-                            style: Theme.of(context).textTheme.headlineSmall),
+                        Text(
+                          'SISTEMA',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                         const Spacer(),
                         _SquareIconButton(
                           icon: Icons.close_rounded,
@@ -938,18 +914,10 @@ final class _ControlPainter extends CustomPainter {
     final Paint fill = Paint()
       ..style = PaintingStyle.fill
       ..color = OdparDesign.voidBlack.withValues(alpha: 0.38);
-    canvas.drawCircle(
-      layout.joystickCenter,
-      layout.joystickRadius,
-      fill,
-    );
-    canvas.drawCircle(
-      layout.joystickCenter,
-      layout.joystickRadius,
-      line,
-    );
-    final Offset knob = layout.joystickCenter +
-        moveVector * (layout.joystickRadius * 0.62);
+    canvas.drawCircle(layout.joystickCenter, layout.joystickRadius, fill);
+    canvas.drawCircle(layout.joystickCenter, layout.joystickRadius, line);
+    final Offset knob =
+        layout.joystickCenter + moveVector * (layout.joystickRadius * 0.62);
     canvas.drawCircle(
       knob,
       layout.joystickRadius * 0.29,
@@ -1024,7 +992,10 @@ final class _ControlPainter extends CustomPainter {
       maxLines: 1,
       textDirection: TextDirection.ltr,
     )..layout(maxWidth: layout.actionRect.width - 8);
-    painter.paint(canvas, center - Offset(painter.width / 2, painter.height / 2));
+    painter.paint(
+      canvas,
+      center - Offset(painter.width / 2, painter.height / 2),
+    );
   }
 
   @override

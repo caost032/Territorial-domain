@@ -80,8 +80,10 @@ final class _StartupFailure extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('NATIVE CORE OFFLINE',
-                        style: Theme.of(context).textTheme.titleLarge),
+                    Text(
+                      'NATIVE CORE OFFLINE',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                     const SizedBox(height: 12),
                     const Text(
                       'La app no pudo validar ODG API 14 / FFI ABI 1. '

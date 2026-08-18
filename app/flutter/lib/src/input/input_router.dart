@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../native/odg_bindings.dart';
@@ -31,8 +30,8 @@ final class ControlLayout {
     final double actionX = moveOnLeft
         ? viewport.width - safePadding.right - 18 - actionDiameter
         : safePadding.left + 18;
-    final double actionY = viewport.height - safePadding.bottom - 18 -
-        actionDiameter;
+    final double actionY =
+        viewport.height - safePadding.bottom - 18 - actionDiameter;
     final Rect action = Rect.fromLTWH(
       actionX,
       actionY,
@@ -80,14 +79,11 @@ final class GameInputSample {
   final double lookY;
   final int buttons;
 
-  int get moveXQ15 =>
-      (moveX * 32767).round().clamp(-32767, 32767).toInt();
+  int get moveXQ15 => (moveX * 32767).round().clamp(-32767, 32767).toInt();
   int get moveForwardQ15 =>
       (moveForward * 32767).round().clamp(-32767, 32767).toInt();
-  int get lookXQ15 =>
-      (lookX * 32767).round().clamp(-32767, 32767).toInt();
-  int get lookYQ15 =>
-      (lookY * 32767).round().clamp(-32767, 32767).toInt();
+  int get lookXQ15 => (lookX * 32767).round().clamp(-32767, 32767).toInt();
+  int get lookYQ15 => (lookY * 32767).round().clamp(-32767, 32767).toInt();
 }
 
 final class MultiTouchInputRouter extends ChangeNotifier {
@@ -212,17 +208,15 @@ final class MultiTouchInputRouter extends ChangeNotifier {
       _moveVector = Offset.zero;
       return;
     }
-    final Offset raw = (position - layout.joystickCenter) /
-        layout.joystickRadius;
+    final Offset raw =
+        (position - layout.joystickCenter) / layout.joystickRadius;
     final double magnitude = raw.distance;
     if (magnitude <= 0.075) {
       _moveVector = Offset.zero;
       return;
     }
     final double normalizedMagnitude =
-        ((math.min(1, magnitude) - 0.075) / 0.925)
-            .clamp(0, 1)
-            .toDouble();
+        ((math.min(1, magnitude) - 0.075) / 0.925).clamp(0, 1).toDouble();
     _moveVector = raw / magnitude * normalizedMagnitude;
   }
 }

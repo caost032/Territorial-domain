@@ -6,18 +6,18 @@ enum RasterQuality { efficient, balanced, high, ultra }
 
 extension RasterQualityPresentation on RasterQuality {
   String get label => switch (this) {
-        RasterQuality.efficient => 'EFICIENTE',
-        RasterQuality.balanced => 'EQUILIBRADA',
-        RasterQuality.high => 'ALTA',
-        RasterQuality.ultra => 'ULTRA',
-      };
+    RasterQuality.efficient => 'EFICIENTE',
+    RasterQuality.balanced => 'EQUILIBRADA',
+    RasterQuality.high => 'ALTA',
+    RasterQuality.ultra => 'ULTRA',
+  };
 
   double get pixelFraction => switch (this) {
-        RasterQuality.efficient => 0.16,
-        RasterQuality.balanced => 0.30,
-        RasterQuality.high => 0.58,
-        RasterQuality.ultra => 1.0,
-      };
+    RasterQuality.efficient => 0.16,
+    RasterQuality.balanced => 0.30,
+    RasterQuality.high => 0.58,
+    RasterQuality.ultra => 1.0,
+  };
 }
 
 final class RenderSize {
@@ -51,22 +51,22 @@ final class RasterBudget {
   }) {
     final double aspect = viewportAspect.clamp(0.25, 4).toDouble();
     final double scale = adaptiveScale.clamp(0.5, 1).toDouble();
-    final int pixelBudget = math.max(
-      16384,
-      math.min(
-        abi.maxRenderPixels,
-        (abi.maxRenderPixels * quality.pixelFraction * scale * scale).floor(),
-      ),
-    ).toInt();
+    final int pixelBudget = math
+        .max(
+          16384,
+          math.min(
+            abi.maxRenderPixels,
+            (abi.maxRenderPixels * quality.pixelFraction * scale * scale)
+                .floor(),
+          ),
+        )
+        .toInt();
 
     double width = math.sqrt(pixelBudget * aspect);
     double height = width / aspect;
     final double dimensionScale = math.min(
       1.0,
-      math.min(
-        abi.maxRenderWidth / width,
-        abi.maxRenderHeight / height,
-      ),
+      math.min(abi.maxRenderWidth / width, abi.maxRenderHeight / height),
     );
     width *= dimensionScale;
     height *= dimensionScale;

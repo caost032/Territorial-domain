@@ -190,61 +190,42 @@ final class OdgLeaderEntry extends Struct {
 }
 
 typedef _ApiVersionNative = Uint32 Function();
-typedef _ApiVersionDart = int Function();
-typedef _AbiQueryNative = Int32 Function(
-  Uint32,
-  Pointer<OdgFfiAbiInfo>,
-  Uint64,
-  Pointer<Uint64>,
-);
-typedef _AbiQueryDart = int Function(
-  int,
-  Pointer<OdgFfiAbiInfo>,
-  int,
-  Pointer<Uint64>,
-);
+typedef OdgApiVersionFunction = int Function();
+typedef _AbiQueryNative =
+    Int32 Function(Uint32, Pointer<OdgFfiAbiInfo>, Uint64, Pointer<Uint64>);
+typedef OdgAbiQueryFunction =
+    int Function(int, Pointer<OdgFfiAbiInfo>, int, Pointer<Uint64>);
 typedef _InitNative = Int32 Function(Uint64, Uint32, Uint32);
-typedef _InitDart = int Function(int, int, int);
+typedef OdgInitFunction = int Function(int, int, int);
 typedef _ResizeNative = Int32 Function(Uint32, Uint32);
-typedef _ResizeDart = int Function(int, int);
+typedef OdgResizeFunction = int Function(int, int);
 typedef _ResetNative = Void Function(Uint64);
-typedef _ResetDart = void Function(int);
-typedef _SetInputNative = Void Function(
-  Int32,
-  Int32,
-  Int32,
-  Int32,
-  Uint32,
-);
-typedef _SetInputDart = void Function(int, int, int, int, int);
+typedef OdgResetFunction = void Function(int);
+typedef _SetInputNative = Void Function(Int32, Int32, Int32, Int32, Uint32);
+typedef OdgSetInputFunction = void Function(int, int, int, int, int);
 typedef _TickNative = Void Function(Uint32);
-typedef _TickDart = void Function(int);
+typedef OdgTickFunction = void Function(int);
 typedef _RenderNative = UintPtr Function();
-typedef _RenderDart = int Function();
-typedef _CopyFrameNative = Int32 Function(
+typedef OdgRenderFunction = int Function();
+typedef _CopyFrameNative =
+    Int32 Function(Pointer<Uint8>, Uint64, Pointer<Uint64>);
+typedef OdgCopyFrameFunction = int Function(
   Pointer<Uint8>,
-  Uint64,
-  Pointer<Uint64>,
-);
-typedef _CopyFrameDart = int Function(Pointer<Uint8>, int, Pointer<Uint64>);
-typedef _CopyStatsNative = Int32 Function(
-  Pointer<OdgGameStats>,
-  Uint64,
-  Pointer<Uint64>,
-);
-typedef _CopyStatsDart = int Function(
-  Pointer<OdgGameStats>,
   int,
   Pointer<Uint64>,
 );
+typedef _CopyStatsNative =
+    Int32 Function(Pointer<OdgGameStats>, Uint64, Pointer<Uint64>);
+typedef OdgCopyStatsFunction =
+    int Function(Pointer<OdgGameStats>, int, Pointer<Uint64>);
 typedef _SetU32Native = Void Function(Uint32);
-typedef _SetU32Dart = void Function(int);
+typedef OdgSetU32Function = void Function(int);
 typedef _U32Native = Uint32 Function();
-typedef _U32Dart = int Function();
+typedef OdgU32Function = int Function();
 typedef _U64Native = Uint64 Function();
-typedef _U64Dart = int Function();
+typedef OdgU64Function = int Function();
 typedef _RankNative = Uint32 Function(Uint32);
-typedef _RankDart = int Function(int);
+typedef OdgRankFunction = int Function(int);
 
 final class OdgAbiDescriptor {
   const OdgAbiDescriptor({
@@ -274,73 +255,65 @@ final class OdgNativeException implements Exception {
 
 final class OdgNativeApi {
   OdgNativeApi._(this.library)
-      : apiVersion =
-            library.lookupFunction<_ApiVersionNative, _ApiVersionDart>(
-          'odg_api_version',
-        ),
-        ffiAbiQuery = library.lookupFunction<_AbiQueryNative, _AbiQueryDart>(
-          'odg_ffi_abi_query',
-        ),
-        init = library.lookupFunction<_InitNative, _InitDart>('odg_init'),
-        resize =
-            library.lookupFunction<_ResizeNative, _ResizeDart>('odg_resize'),
-        reset = library.lookupFunction<_ResetNative, _ResetDart>('odg_reset'),
-        setInput = library.lookupFunction<_SetInputNative, _SetInputDart>(
-          'odg_set_input',
-        ),
-        tickUs =
-            library.lookupFunction<_TickNative, _TickDart>('odg_tick_us'),
-        renderFrame =
-            library.lookupFunction<_RenderNative, _RenderDart>(
-          'odg_render_frame',
-        ),
-        copyFramebuffer =
-            library.lookupFunction<_CopyFrameNative, _CopyFrameDart>(
-          'odg_copy_framebuffer',
-        ),
-        copyStats =
-            library.lookupFunction<_CopyStatsNative, _CopyStatsDart>(
-          'odg_copy_stats',
-        ),
-        framebufferBytes = library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_framebuffer_bytes',
-        ),
-        framebufferStrideBytes =
-            library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_framebuffer_stride_bytes',
-        ),
-        renderWidth = library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_render_width',
-        ),
-        renderHeight = library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_render_height',
-        ),
-        setVisualTheme =
-            library.lookupFunction<_SetU32Native, _SetU32Dart>(
-          'odg_set_visual_theme',
-        ),
-        visualTheme = library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_visual_theme',
-        ),
-        setPresentationMode =
-            library.lookupFunction<_SetU32Native, _SetU32Dart>(
-          'odg_set_presentation_mode',
-        ),
-        stateHash = library.lookupFunction<_U64Native, _U64Dart>(
-          'odg_state_hash',
-        ),
-        leaderCount = library.lookupFunction<_U32Native, _U32Dart>(
-          'odg_leader_count',
-        ),
-        leaderScore = library.lookupFunction<_RankNative, _RankDart>(
-          'odg_leader_score',
-        ),
-        leaderNameCode = library.lookupFunction<_RankNative, _RankDart>(
-          'odg_leader_name_code',
-        ),
-        leaderIsPlayer = library.lookupFunction<_RankNative, _RankDart>(
-          'odg_leader_is_player',
-        );
+    : apiVersion = library.lookupFunction<_ApiVersionNative, OdgApiVersionFunction>(
+        'odg_api_version',
+      ),
+      ffiAbiQuery = library.lookupFunction<_AbiQueryNative, OdgAbiQueryFunction>(
+        'odg_ffi_abi_query',
+      ),
+      init = library.lookupFunction<_InitNative, OdgInitFunction>('odg_init'),
+      resize = library.lookupFunction<_ResizeNative, OdgResizeFunction>('odg_resize'),
+      reset = library.lookupFunction<_ResetNative, OdgResetFunction>('odg_reset'),
+      setInput = library.lookupFunction<_SetInputNative, OdgSetInputFunction>(
+        'odg_set_input',
+      ),
+      tickUs = library.lookupFunction<_TickNative, OdgTickFunction>('odg_tick_us'),
+      renderFrame = library.lookupFunction<_RenderNative, OdgRenderFunction>(
+        'odg_render_frame',
+      ),
+      copyFramebuffer = library
+          .lookupFunction<_CopyFrameNative, OdgCopyFrameFunction>(
+            'odg_copy_framebuffer',
+          ),
+      copyStats = library.lookupFunction<_CopyStatsNative, OdgCopyStatsFunction>(
+        'odg_copy_stats',
+      ),
+      framebufferBytes = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_framebuffer_bytes',
+      ),
+      framebufferStrideBytes = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_framebuffer_stride_bytes',
+      ),
+      renderWidth = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_render_width',
+      ),
+      renderHeight = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_render_height',
+      ),
+      setVisualTheme = library.lookupFunction<_SetU32Native, OdgSetU32Function>(
+        'odg_set_visual_theme',
+      ),
+      visualTheme = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_visual_theme',
+      ),
+      setPresentationMode = library.lookupFunction<_SetU32Native, OdgSetU32Function>(
+        'odg_set_presentation_mode',
+      ),
+      stateHash = library.lookupFunction<_U64Native, OdgU64Function>(
+        'odg_state_hash',
+      ),
+      leaderCount = library.lookupFunction<_U32Native, OdgU32Function>(
+        'odg_leader_count',
+      ),
+      leaderScore = library.lookupFunction<_RankNative, OdgRankFunction>(
+        'odg_leader_score',
+      ),
+      leaderNameCode = library.lookupFunction<_RankNative, OdgRankFunction>(
+        'odg_leader_name_code',
+      ),
+      leaderIsPlayer = library.lookupFunction<_RankNative, OdgRankFunction>(
+        'odg_leader_is_player',
+      );
 
   factory OdgNativeApi.open() {
     if (!Platform.isAndroid && !Platform.isLinux) {
@@ -354,28 +327,28 @@ final class OdgNativeApi {
   }
 
   final DynamicLibrary library;
-  final _ApiVersionDart apiVersion;
-  final _AbiQueryDart ffiAbiQuery;
-  final _InitDart init;
-  final _ResizeDart resize;
-  final _ResetDart reset;
-  final _SetInputDart setInput;
-  final _TickDart tickUs;
-  final _RenderDart renderFrame;
-  final _CopyFrameDart copyFramebuffer;
-  final _CopyStatsDart copyStats;
-  final _U32Dart framebufferBytes;
-  final _U32Dart framebufferStrideBytes;
-  final _U32Dart renderWidth;
-  final _U32Dart renderHeight;
-  final _SetU32Dart setVisualTheme;
-  final _U32Dart visualTheme;
-  final _SetU32Dart setPresentationMode;
-  final _U64Dart stateHash;
-  final _U32Dart leaderCount;
-  final _RankDart leaderScore;
-  final _RankDart leaderNameCode;
-  final _RankDart leaderIsPlayer;
+  final OdgApiVersionFunction apiVersion;
+  final OdgAbiQueryFunction ffiAbiQuery;
+  final OdgInitFunction init;
+  final OdgResizeFunction resize;
+  final OdgResetFunction reset;
+  final OdgSetInputFunction setInput;
+  final OdgTickFunction tickUs;
+  final OdgRenderFunction renderFrame;
+  final OdgCopyFrameFunction copyFramebuffer;
+  final OdgCopyStatsFunction copyStats;
+  final OdgU32Function framebufferBytes;
+  final OdgU32Function framebufferStrideBytes;
+  final OdgU32Function renderWidth;
+  final OdgU32Function renderHeight;
+  final OdgSetU32Function setVisualTheme;
+  final OdgU32Function visualTheme;
+  final OdgSetU32Function setPresentationMode;
+  final OdgU64Function stateHash;
+  final OdgU32Function leaderCount;
+  final OdgRankFunction leaderScore;
+  final OdgRankFunction leaderNameCode;
+  final OdgRankFunction leaderIsPlayer;
 
   OdgAbiDescriptor queryAndValidateAbi() {
     final Pointer<OdgFfiAbiInfo> info = calloc<OdgFfiAbiInfo>();
@@ -391,7 +364,8 @@ final class OdgNativeApi {
         throw OdgNativeException('FFI ABI query failed', status);
       }
       final OdgFfiAbiInfo value = info.ref;
-      const int requiredFeatures = odgFfiFeatureFramebufferCopy |
+      const int requiredFeatures =
+          odgFfiFeatureFramebufferCopy |
           odgFfiFeatureStatsCopy |
           odgFfiFeaturePortraitRender |
           odgFfiFeatureFixed120Hz |

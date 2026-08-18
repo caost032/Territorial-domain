@@ -14,7 +14,8 @@ void main() {
   });
 
   test('required feature mask remains explicit', () {
-    const int required = odgFfiFeatureFramebufferCopy |
+    const int required =
+        odgFfiFeatureFramebufferCopy |
         odgFfiFeatureStatsCopy |
         odgFfiFeaturePortraitRender |
         odgFfiFeatureFixed120Hz |

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
+import 'dart:ffi' hide Size;
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -15,25 +15,18 @@ import '../render/raster_budget.dart';
 import 'game_snapshot.dart';
 
 final class GameRuntime extends ChangeNotifier {
-  GameRuntime._({
-    required this.input,
-    required this.api,
-    required this.abi,
-  })  : _frameCapacity = abi.maxRenderPixels * 4,
-        _frameBuffer = calloc<Uint8>(abi.maxRenderPixels * 4),
-        _statsBuffer = calloc<OdgGameStats>(),
-        _required = calloc<Uint64>() {
+  GameRuntime._({required this.input, required this.api, required this.abi})
+    : _frameCapacity = abi.maxRenderPixels * 4,
+      _frameBuffer = calloc<Uint8>(abi.maxRenderPixels * 4),
+      _statsBuffer = calloc<OdgGameStats>(),
+      _required = calloc<Uint64>() {
     _ticker = Ticker(_onTick);
   }
 
   factory GameRuntime.open(MultiTouchInputRouter input) {
     final OdgNativeApi api = OdgNativeApi.open();
     final OdgAbiDescriptor abi = api.queryAndValidateAbi();
-    final GameRuntime runtime = GameRuntime._(
-      input: input,
-      api: api,
-      abi: abi,
-    );
+    final GameRuntime runtime = GameRuntime._(input: input, api: api, abi: abi);
     runtime._initialize();
     return runtime;
   }
@@ -168,8 +161,9 @@ final class GameRuntime extends ChangeNotifier {
     final Duration? previous = _previousElapsed;
     _previousElapsed = elapsed;
     if (previous == null) return;
-    final int elapsedUs =
-        (elapsed - previous).inMicroseconds.clamp(0, 50000).toInt();
+    final int elapsedUs = (elapsed - previous).inMicroseconds
+        .clamp(0, 50000)
+        .toInt();
     final GameInputSample sample = input.sample();
     api.setInput(
       sample.moveXQ15,
