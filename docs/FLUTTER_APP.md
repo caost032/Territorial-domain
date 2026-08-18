@@ -76,7 +76,7 @@ app/flutter/
 
 ## Desarrollo Flutter
 
-Se requiere Flutter estable con Dart 3.8 o posterior. Las pruebas que no abren
+El build reproducible usa Flutter 3.47.0 con Dart 3.8 o posterior. Las pruebas que no abren
 la biblioteca nativa pueden ejecutarse en cualquier estación Flutter:
 
 ```sh
@@ -110,7 +110,7 @@ Flutter, Android SDK/NDK y CMake instalados:
 ```sh
 cd app/flutter
 flutter pub get
-gradle -p android wrapper --gradle-version 8.10.2 --distribution-type bin
+gradle -p android wrapper --gradle-version 8.14 --distribution-type bin
 flutter build apk --release \
   --target-platform android-arm,android-arm64,android-x64
 flutter build apk --release --split-per-abi \

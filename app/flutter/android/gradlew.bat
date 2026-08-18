@@ -14,5 +14,5 @@ IF %ERRORLEVEL% EQU 0 (
   EXIT /B %ERRORLEVEL%
 )
 
-ECHO Gradle wrapper JAR not found. Run: gradle wrapper --gradle-version 8.10.2 1>&2
+ECHO Gradle wrapper JAR not found. Run: gradle wrapper --gradle-version 8.14 1>&2
 EXIT /B 1

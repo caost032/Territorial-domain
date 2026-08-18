@@ -32,12 +32,13 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: "3.47.0"
           cache: true
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.10.2"
+          gradle-version: "8.14"
 
       - name: Test and harden the C11 core
         run: make test soak native host-check
@@ -52,8 +53,7 @@ jobs:
       - name: Parse, analyze and test Dart
         working-directory: app/flutter
         run: |
-          dart format lib test
-          git diff --patch -- lib test
+          dart format --output=none --set-exit-if-changed lib test
           flutter analyze
           flutter test
 
@@ -63,7 +63,7 @@ jobs:
             "$ANDROID_SDK_ROOT" "$FLUTTER_ROOT" \
             > app/flutter/android/local.properties
           gradle -p app/flutter/android wrapper \
-            --gradle-version 8.10.2 --distribution-type bin
+            --gradle-version 8.14 --distribution-type bin
           chmod +x app/flutter/android/gradlew
 
       - name: Build universal APK
