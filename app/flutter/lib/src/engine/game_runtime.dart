@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ffi' hide Size;
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:ffi/ffi.dart';

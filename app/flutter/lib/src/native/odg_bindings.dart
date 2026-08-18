@@ -209,11 +209,8 @@ typedef _RenderNative = UintPtr Function();
 typedef OdgRenderFunction = int Function();
 typedef _CopyFrameNative =
     Int32 Function(Pointer<Uint8>, Uint64, Pointer<Uint64>);
-typedef OdgCopyFrameFunction = int Function(
-  Pointer<Uint8>,
-  int,
-  Pointer<Uint64>,
-);
+typedef OdgCopyFrameFunction =
+    int Function(Pointer<Uint8>, int, Pointer<Uint64>);
 typedef _CopyStatsNative =
     Int32 Function(Pointer<OdgGameStats>, Uint64, Pointer<Uint64>);
 typedef OdgCopyStatsFunction =
@@ -255,19 +252,27 @@ final class OdgNativeException implements Exception {
 
 final class OdgNativeApi {
   OdgNativeApi._(this.library)
-    : apiVersion = library.lookupFunction<_ApiVersionNative, OdgApiVersionFunction>(
-        'odg_api_version',
-      ),
-      ffiAbiQuery = library.lookupFunction<_AbiQueryNative, OdgAbiQueryFunction>(
-        'odg_ffi_abi_query',
-      ),
+    : apiVersion = library
+          .lookupFunction<_ApiVersionNative, OdgApiVersionFunction>(
+            'odg_api_version',
+          ),
+      ffiAbiQuery = library
+          .lookupFunction<_AbiQueryNative, OdgAbiQueryFunction>(
+            'odg_ffi_abi_query',
+          ),
       init = library.lookupFunction<_InitNative, OdgInitFunction>('odg_init'),
-      resize = library.lookupFunction<_ResizeNative, OdgResizeFunction>('odg_resize'),
-      reset = library.lookupFunction<_ResetNative, OdgResetFunction>('odg_reset'),
+      resize = library.lookupFunction<_ResizeNative, OdgResizeFunction>(
+        'odg_resize',
+      ),
+      reset = library.lookupFunction<_ResetNative, OdgResetFunction>(
+        'odg_reset',
+      ),
       setInput = library.lookupFunction<_SetInputNative, OdgSetInputFunction>(
         'odg_set_input',
       ),
-      tickUs = library.lookupFunction<_TickNative, OdgTickFunction>('odg_tick_us'),
+      tickUs = library.lookupFunction<_TickNative, OdgTickFunction>(
+        'odg_tick_us',
+      ),
       renderFrame = library.lookupFunction<_RenderNative, OdgRenderFunction>(
         'odg_render_frame',
       ),
@@ -275,15 +280,17 @@ final class OdgNativeApi {
           .lookupFunction<_CopyFrameNative, OdgCopyFrameFunction>(
             'odg_copy_framebuffer',
           ),
-      copyStats = library.lookupFunction<_CopyStatsNative, OdgCopyStatsFunction>(
-        'odg_copy_stats',
-      ),
+      copyStats = library
+          .lookupFunction<_CopyStatsNative, OdgCopyStatsFunction>(
+            'odg_copy_stats',
+          ),
       framebufferBytes = library.lookupFunction<_U32Native, OdgU32Function>(
         'odg_framebuffer_bytes',
       ),
-      framebufferStrideBytes = library.lookupFunction<_U32Native, OdgU32Function>(
-        'odg_framebuffer_stride_bytes',
-      ),
+      framebufferStrideBytes = library
+          .lookupFunction<_U32Native, OdgU32Function>(
+            'odg_framebuffer_stride_bytes',
+          ),
       renderWidth = library.lookupFunction<_U32Native, OdgU32Function>(
         'odg_render_width',
       ),
@@ -296,9 +303,10 @@ final class OdgNativeApi {
       visualTheme = library.lookupFunction<_U32Native, OdgU32Function>(
         'odg_visual_theme',
       ),
-      setPresentationMode = library.lookupFunction<_SetU32Native, OdgSetU32Function>(
-        'odg_set_presentation_mode',
-      ),
+      setPresentationMode = library
+          .lookupFunction<_SetU32Native, OdgSetU32Function>(
+            'odg_set_presentation_mode',
+          ),
       stateHash = library.lookupFunction<_U64Native, OdgU64Function>(
         'odg_state_hash',
       ),
