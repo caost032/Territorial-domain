@@ -1,0 +1,9 @@
+/build/
+/app/web/odpar_territorial_domain.wasm
+/app/web/ODPAR_Territorial_Domain.html
+/app/flutter/.dart_tool/
+/app/flutter/build/
+/app/flutter/android/local.properties
+/artifacts/*.ppm
+**/__pycache__/
+*.pyc

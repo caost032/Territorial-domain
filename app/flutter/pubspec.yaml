@@ -1,0 +1,20 @@
+name: odpar_territorial_domain
+description: Flutter/Dart FFI app for the deterministic ODPAR Territorial Domain C11 engine.
+publish_to: none
+version: 0.14.0+14
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  ffi: ^2.1.4
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
