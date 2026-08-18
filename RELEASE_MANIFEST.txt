@@ -1,0 +1,46 @@
+ODPAR: Territorial Domain — v14 release manifest
+Date: 2026-08-18
+Edition: territorial_domain_v14_native_app_and_conquest_infrastructure
+Authority: deterministic native C11
+Gameplay API: 14
+FFI ABI: 1
+Release form: clean, buildable source package
+
+Product surfaces:
+  engine/                 authoritative simulation, mechanics and software renderer
+  app/flutter/            complete Flutter/Dart FFI application and native packaging
+  app/web/index.html      browser preview host for a freshly compiled C/WASM module
+  .github/workflows/      reproducible Flutter/APK and WASM release gates
+  tests/                  deterministic, ABI and long-run regression suites
+  tools/                  capture, benchmark, hardening and contract checks
+  artifacts/              final landscape and portrait visual references
+  docs/                   architecture, embedding, reuse and verification boundaries
+
+v14 gameplay changes:
+  - first strict local playable-cell majority commissions a neutral turret;
+  - territory never flips an already-owned turret;
+  - chips remain reserved for reprogramming enemy-owned infrastructure;
+  - neutral turrets neither advertise nor consume a chip;
+  - actor, carrier, chip and turret state validation is defensive.
+
+v14 presentation and host changes:
+  - restrained semantic palettes, terrain-integrated ownership, finer trails,
+    atmospheric depth and adaptive portrait/landscape film fit;
+  - deliberately square actors and continuous trail joins without redundant
+    diagonal corner triangles;
+  - complete SafeArea/multitouch/lifecycle Flutter UI over the C framebuffer;
+  - fixed FFI discovery/copy ABI and strict native symbol allowlist;
+  - adaptive raster density never changes the 120 Hz simulation or game state;
+  - Flutter and web use the same six C11 source files as the only game authority.
+
+Final visual references:
+  artifacts/ODPAR_Territorial_Domain_v14_LANDSCAPE.png
+  artifacts/ODPAR_Territorial_Domain_v14_PORTRAIT.png
+
+Intentionally not included:
+  - stale v13 generated HTML, WASM or native binaries;
+  - local build products, caches, APKs or toolchain-specific intermediates.
+
+The included GitHub Actions workflow generates and tests target APK/WASM artifacts
+with the appropriate Flutter and LLVM toolchains. See CERTIFICATION.md for exactly
+which gates ran on the preparation host and which remain target-toolchain gates.

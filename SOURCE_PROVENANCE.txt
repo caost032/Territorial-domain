@@ -1,0 +1,13 @@
+ODPAR: Territorial Domain v14 source provenance
+Date: 2026-08-18
+
+Primary game input supplied by the user:
+  ODPAR-Territorial-domain-v13-LATEST(2).zip
+  SHA-256 79d304bbbe23b278d3fb76561bba9dcae12ce8b89870e0f25837495b3d41e686
+
+Capability reference supplied by the user:
+  ODPAR-Music-Motion-LATEST (27).zip
+  SHA-256 2be6e55761f6fef2c9e43b312d56700a02bda32864a9b1b3735199bf5ae286b4
+
+Territorial Domain remains the product and authoritative game. Only bounded reusable
+capabilities/patterns are retained from the reference; see docs/REUSE_LEDGER.md.

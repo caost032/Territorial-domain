@@ -1,0 +1,102 @@
+{
+  "project": "ODPAR: Territorial domain",
+  "schema_version": 14,
+  "edition": "territorial_domain_v14_native_app_and_conquest_infrastructure",
+  "kind": "lightweight_embeddable_3d_io_territory_game",
+  "source_parent": {
+    "title": "ODPAR-Territorial-domain-v13-LATEST(2).zip",
+    "sha256": "79d304bbbe23b278d3fb76561bba9dcae12ce8b89870e0f25837495b3d41e686"
+  },
+  "capability_reference": {
+    "title": "ODPAR-Music-Motion-LATEST (27).zip",
+    "sha256": "2be6e55761f6fef2c9e43b312d56700a02bda32864a9b1b3735199bf5ae286b4"
+  },
+  "authority": {
+    "source_of_truth": "native_C11",
+    "webassembly_role": "preview_only",
+    "browser_dependency": false,
+    "flutter_host": "Dart_FFI_same_C11_sources"
+  },
+  "runtime": {
+    "language": "C11",
+    "api_version": 14,
+    "ffi_abi_version": 1,
+    "simulation_hz": 120,
+    "allocation_grid": [
+      128,
+      128
+    ],
+    "playable_topology": "irregular_country_mask",
+    "participants": 10,
+    "turrets": 14,
+    "ammo_crates": 14,
+    "automatic_respawn": false,
+    "default_render": [
+      640,
+      360
+    ],
+    "max_render_dimension": 1280,
+    "max_render_pixels": 921600,
+    "portrait_render": [
+      720,
+      1280
+    ],
+    "runtime_heap_required": false,
+    "native_ffi": true,
+    "ffi_discovery_and_copy_api": true,
+    "native_symbol_allowlist": true,
+    "flutter_app_source": true,
+    "github_actions_apk_build": true,
+    "webassembly_preview": true,
+    "chips": 8,
+    "ammo_crate_initial": 14,
+    "ammo_crate_capacity": 24
+  },
+  "current_control_contract": [
+    "fixed_configurable_touch_joystick",
+    "joystick_vector_is_camera_local_each_tick",
+    "free_camera_drag_independent_from_joystick",
+    "camera_yaw_holds_after_look_release",
+    "normal_ground_path_obeys_requested_direction_immediately",
+    "body_orientation_rotates_inertially",
+    "near_180_reversal_brakes_before_backward_translation",
+    "no_joystick_rebasing_or_auto_migration"
+  ],
+  "current_render_contract": [
+    "dependency_free_C_software_renderer",
+    "scanline_span_triangle_rasterization",
+    "incremental_inverse_depth",
+    "perspective_correct_depth",
+    "near_plane_clipping",
+    "depth_tested_world_lines",
+    "procedural_height_field",
+    "ground_hugging_cube_actors_without_vertical_bob",
+    "world_relative_celestial_cycle",
+    "terrain_following_shadows_above_territory_fill",
+    "restrained_semantic_material_palette",
+    "terrain_integrated_territory_fill",
+    "signal_width_visual_trails_over_exact_grid_topology",
+    "max_dimension_1280_under_921600_pixel_budget",
+    "portrait_and_landscape_without_state_reset",
+    "webgl2_framebuffer_presentation_with_2d_fallback"
+  ],
+  "not_claimed": [
+    "deployed_online_multiplayer",
+    "matchmaking",
+    "accounts",
+    "network_reconciliation",
+    "anti_cheat_backend"
+  ],
+  "current_gameplay_contract": [
+    "ground_owner_and_trail_owner_are_independent_layers",
+    "enemy_trail_contact_has_priority_over_home_ground",
+    "self_trails_are_non_lethal",
+    "owned_enemy_turrets_require_reprogram_chip",
+    "neutral_turret_first_strict_local_majority_wins",
+    "neutral_turrets_never_consume_reprogram_chips",
+    "turret_relocation_is_owner_territory_bound",
+    "turrets_partial_refill_from_nearby_actor_supply",
+    "general_drop_action_materializes_or_releases_carried_resources",
+    "territory_capture_preserves_unclaimed_disconnected_remainders"
+  ]
+}
